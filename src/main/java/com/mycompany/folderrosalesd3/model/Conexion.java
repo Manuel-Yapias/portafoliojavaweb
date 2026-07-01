@@ -17,7 +17,7 @@ public class Conexion {
     public static Connection getConexion() throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?sslmode=require";
+            String url = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?sslmode=require&sslfactory=org.postgresql.ssl.NonValidatingFactory";
             return DriverManager.getConnection(url, USER, PASS);
         } catch (ClassNotFoundException e) {
             throw new SQLException("Driver no encontrado: " + e.getMessage());
