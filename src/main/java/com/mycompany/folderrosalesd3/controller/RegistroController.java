@@ -2,6 +2,7 @@ package com.mycompany.folderrosalesd3.controller;
 
 import com.mycompany.folderrosalesd3.model.Conexion;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import jakarta.servlet.ServletException;
@@ -16,30 +17,34 @@ public class RegistroController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        // 1. Ejecuta el truco para asegurar que la tabla usuarios exista en Render
-        Conexion.crearTablaUsuariosSiNoExiste();
-
-        // 2. Captura lo que el usuario escribió en el formulario del index.jsp
         String txtUser = request.getParameter("usuario");
         String txtPass = request.getParameter("contrasena"); 
 
-        // 3. Inserta los datos en Postgres de Render
-        String sql = "INSERT INTO usuarios (username, password) VALUES (?, ?)";
+        try {
+            // Aseguramos la tabla primero
+            Conexion.crearTablaUsuariosSiNoExiste();
 
-        try (Connection con = Conexion.getConexion(); 
-             PreparedStatement ps = con.prepareStatement(sql)) {
-            
-            ps.setString(1, txtUser);
-            ps.setString(2, txtPass);
-            ps.executeUpdate();
-            
-            // Si funciona, redirige al index con mensaje de éxito
-            response.sendRedirect("index.jsp?registro=ok");
-
+            String sql = "INSERT INTO usuarios (username, password) VALUES (?, ?)";
+            try (Connection con = Conexion.getConexion(); 
+                 PreparedStatement ps = con.prepareStatement(sql)) {
+                
+                ps.setString(1, txtUser);
+                ps.setString(2, txtPass);
+                ps.executeUpdate();
+                
+                response.sendRedirect("index.jsp?registro=ok");
+            }
         } catch (Exception e) {
-            e.printStackTrace();
-            // Si falla (por ejemplo, si el usuario ya existe), redirige con error
-            response.sendRedirect("index.jsp?error=fail");
+            // ¡ESTO ES LO IMPORTANTE! Si falla, imprimirá el error real en texto en la pantalla
+            response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<h2>Error de Conexión Detectado:</h2>");
+                out.println("<p style='color:red; font-weight:bold;'>" + e.getMessage() + "</p>");
+                out.println("<pre>");
+                e.printStackTrace(out);
+                out.println("</pre>");
+                out.println("<br><a href='index.jsp'>Volver</a>");
+            }
         }
     }
 }
