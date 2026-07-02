@@ -1,22 +1,21 @@
-# Paso 1: Compilar la aplicación con Maven
+# Paso 1: Compilar el WAR con Maven usando Java 17
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
+COPY . .
 RUN mvn clean package -DskipTests
 
-# Paso 2: Correr la aplicación en Tomcat
+# Paso 2: Usar Tomcat oficial y configurar las librerías manualmente
 FROM tomcat:10.1-jdk17-temurin
 WORKDIR /usr/local/tomcat
 
-# Borramos las apps por defecto de Tomcat para evitar conflictos
+# Borramos contenido basura por defecto
 RUN rm -rf webapps/*
 
-# 1. Copiamos tu archivo WAR compilado directamente como ROOT.war para que use la raíz
+# Copiamos el archivo WAR renombrándolo a ROOT.war
 COPY --from=build /app/target/*.war webapps/ROOT.war
 
-# 2. TRUCO CLAVE: Copiamos los archivos .jar de las dependencias (como PostgreSQL) a la carpeta lib de Tomcat
-COPY --from=build /app/target/dependency/*.jar lib/ 2>/dev/null || true
+# Descargamos el Driver de PostgreSQL directamente a la carpeta lib de Tomcat para que nunca falte
+ADD https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.2/postgresql-42.7.2.jar lib/
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
