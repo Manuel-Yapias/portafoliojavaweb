@@ -591,42 +591,67 @@
 
                 <div class="scene">
                     <div class="poker-card" onclick="flipCard(this)">
-                        <div class="card-face card-face-front">
+                        <!-- CARA FRONTAL -->
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
                             <div class="flex justify-between items-start">
-                                <span
-                                    class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-005</span>
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-005</span>
                                 <span class="text-[var(--dorado)] text-xs font-mono">♦ 5</span>
                             </div>
+
                             <div class="my-auto text-center space-y-2">
-                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 5</h2>
-                                <p class="text-xs text-gray-400 uppercase tracking-widest">Hilos y Concurrencia</p>
-                                <p class="text-[11px] text-gray-500 font-mono italic">Haz clic para ver los ejercicios
-                                </p>
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 05</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Programación Orientada a Objetos</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los 3 proyectos</p>
                             </div>
+
                             <div class="border-t border-[#222] pt-3 text-center">
-                                <span class="text-[11px] text-emerald-400 font-mono">🎴 10 Ejercicios Listos</span>
+                                <span class="text-[11px] text-emerald-400 font-mono">🎴 Deck de 3 Cartas Completado</span>
                             </div>
                         </div>
-                        <div class="card-face card-face-back" onclick="event.stopPropagation();">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="text-xs text-[var(--dorado)] font-mono font-bold">EJERCICIOS SEMANA
-                                    5</span>
-                                <button class="text-gray-500 hover:text-white text-xs font-mono"
-                                        onclick="revertCard(this)">↩ Volver</button>
+
+                        <!-- CARA TRASERA -->
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
+
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 5</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
+                                    ↩ Volver
+                                </button>
                             </div>
-                            <div class="exercise-list space-y-2 pr-1">
-                                <% for (int i = 1; i <= 10; i++) {%>
-                                <a href="html/semana05/ejercicio<%= String.format(" %02d", i)%>.jsp"
-                                   class="exercise-link flex justify-between items-center p-2 rounded text-xs
-                                   font-mono text-gray-300">
-                                    <span>🃏 Ejercicio <%= i%></span>
-                                    <span class="text-[var(--dorado)]">Ver →</span>
+
+                            <!-- Listado de los 3 Proyectos de la Actividad 06 -->
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+
+                                <!-- Proyecto 01 -->
+                                <a href="${pageContext.request.contextPath}/S5E1Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S5E1 - Dulcería "Dulce Porvenir"</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
                                 </a>
-                                <% } %>
+
+                                <!-- Proyecto 02 -->
+                                <a href="${pageContext.request.contextPath}/S5E2Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S5E2 - Transportes "Angelito Azules"</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <!-- Proyecto 03 -->
+                                <a href="${pageContext.request.contextPath}/S5E3Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S5E3 - Libreta Militar (Ejército)</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
                             </div>
-                            <div class="pt-3 text-center border-t border-[#222]">
-                                <span class="text-[10px] text-gray-500 font-mono">SISTEMAS DE INFORMACIÓN</span>
-                            </div>
+
+                            <button onclick="abrirManual('manualSemana5')" 
+                                    class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
+                                📖 Ver Manual Técnico S5
+                            </button>
                         </div>
                     </div>
                 </div>
