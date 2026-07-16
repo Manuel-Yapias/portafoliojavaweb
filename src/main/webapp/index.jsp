@@ -594,13 +594,13 @@
                         <!-- CARA FRONTAL -->
                         <div class="card-face card-face-front flex flex-col justify-between p-5">
                             <div class="flex justify-between items-start">
-                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-005</span>
-                                <span class="text-[var(--dorado)] text-xs font-mono">♦ 5</span>
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-006</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♦ 6</span>
                             </div>
 
                             <div class="my-auto text-center space-y-2">
-                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 05</h2>
-                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Programación Orientada a Objetos</p>
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 06</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Estructuras de Control y MVC</p>
                                 <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los 3 proyectos</p>
                             </div>
 
@@ -615,42 +615,42 @@
                             <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
                                 <div class="text-left">
                                     <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
-                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 5</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 6</span>
                                 </div>
                                 <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
                                     ↩ Volver
                                 </button>
                             </div>
 
-                            <!-- Listado de los 3 Proyectos de la Actividad 06 -->
+                            <!-- Listado de los 3 Proyectos de la Semana 06 -->
                             <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
 
                                 <!-- Proyecto 01 -->
-                                <a href="${pageContext.request.contextPath}/S5E1Controller" 
+                                <a href="${pageContext.request.contextPath}/S6E1Controller" 
                                    class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
-                                    <span class="truncate pr-2">🃏 S5E1 - Dulcería "Dulce Porvenir"</span>
+                                    <span class="truncate pr-2">🃏 S6E1 - Simulación de Pensiones A</span>
                                     <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
                                 </a>
 
                                 <!-- Proyecto 02 -->
-                                <a href="${pageContext.request.contextPath}/S5E2Controller" 
+                                <a href="${pageContext.request.contextPath}/S6E2Controller" 
                                    class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
-                                    <span class="truncate pr-2">🃏 S5E2 - Transportes "Angelito Azules"</span>
+                                    <span class="truncate pr-2">🃏 S6E2 - Gestión de Cuotas y Descuentos</span>
                                     <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
                                 </a>
 
                                 <!-- Proyecto 03 -->
-                                <a href="${pageContext.request.contextPath}/S5E3Controller" 
+                                <a href="${pageContext.request.contextPath}/S6E3Controller" 
                                    class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
-                                    <span class="truncate pr-2">🃏 S5E3 - Libreta Militar (Ejército)</span>
+                                    <span class="truncate pr-2">🃏 S6E3 - Rebaja de Pensión por Promedio</span>
                                     <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
                                 </a>
 
                             </div>
 
-                            <button onclick="abrirManual('manualSemana5')" 
+                            <button onclick="abrirManual('manualSemana6')" 
                                     class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
-                                📖 Ver Manual Técnico S5
+                                📖 Ver Manual Técnico S6
                             </button>
                         </div>
                     </div>
