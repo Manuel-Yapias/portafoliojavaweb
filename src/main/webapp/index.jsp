@@ -364,89 +364,153 @@
                     </div>
                 </div>
 
-                <div class="scene">
-                    <div class="poker-card" onclick="flipCard(this)">
-                        <div class="card-face card-face-front">
-                            <div class="flex justify-between items-start">
-                                <span
-                                    class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-003</span>
-                                <span class="text-[var(--dorado)] text-xs font-mono">♦ 3</span>
-                            </div>
-                            <div class="my-auto text-center space-y-2">
-                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 3</h2>
-                                <p class="text-xs text-gray-400 uppercase tracking-widest">Programación de Objetos</p>
-                                <p class="text-[11px] text-gray-500 font-mono italic">Haz clic para ver los ejercicios
-                                </p>
-                            </div>
-                            <div class="border-t border-[#222] pt-3 text-center">
-                                <span class="text-[11px] text-emerald-400 font-mono">🎴 10 Ejercicios Listos</span>
-                            </div>
-                        </div>
-                        <div class="card-face card-face-back" onclick="event.stopPropagation();">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="text-xs text-[var(--dorado)] font-mono font-bold">EJERCICIOS SEMANA
-                                    3</span>
-                                <button class="text-gray-500 hover:text-white text-xs font-mono"
-                                        onclick="revertCard(this)">↩ Volver</button>
-                            </div>
-                            <div class="exercise-list space-y-2 pr-1">
-                                <% for (int i = 1; i <= 10; i++) {%>
-                                <a href="html/semana03/ejercicio<%= String.format(" %02d", i)%>.jsp"
-                                   class="exercise-link flex justify-between items-center p-2 rounded text-xs
-                                   font-mono text-gray-300">
-                                    <span>🃏 Ejercicio <%= i%></span>
-                                    <span class="text-[var(--dorado)]">Ver →</span>
-                                </a>
-                                <% } %>
-                            </div>
-                            <div class="pt-3 text-center border-t border-[#222]">
-                                <span class="text-[10px] text-gray-500 font-mono">SISTEMAS DE INFORMACIÓN</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="scene">
+    <div class="poker-card" onclick="flipCard(this)">
+        <div class="card-face card-face-front">
+            <div class="flex justify-between items-start">
+                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-002</span>
+                <span class="text-[var(--dorado)] text-xs font-mono">♦ 2</span>
+            </div>
+            <div class="my-auto text-center space-y-2">
+                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 2</h2>
+                <p class="text-xs text-gray-400 uppercase tracking-widest">Estructuras de Control</p>
+                <p class="text-[11px] text-gray-500 font-mono italic">Haz clic para ver los ejercicios</p>
+            </div>
+            <div class="border-t border-[#222] pt-3 text-center">
+                <span class="text-[11px] text-emerald-400 font-mono">🎴 6 Ejercicios Listos</span>
+            </div>
+        </div>
 
-                <div class="scene">
-                    <div class="poker-card" onclick="flipCard(this)">
-                        <div class="card-face card-face-front">
-                            <div class="flex justify-between items-start">
-                                <span
-                                    class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-004</span>
-                                <span class="text-[var(--dorado)] text-xs font-mono">♦ 4</span>
-                            </div>
-                            <div class="my-auto text-center space-y-2">
-                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 4</h2>
-                                <p class="text-xs text-gray-400 uppercase tracking-widest">Excepciones y Flujos</p>
-                                <p class="text-[11px] text-gray-500 font-mono italic">Haz clic para ver los ejercicios
-                                </p>
-                            </div>
-                            <div class="border-t border-[#222] pt-3 text-center">
-                                <span class="text-[11px] text-emerald-400 font-mono">🎴 10 Ejercicios Listos</span>
-                            </div>
-                        </div>
-                        <div class="card-face card-face-back" onclick="event.stopPropagation();">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="text-xs text-[var(--dorado)] font-mono font-bold">EJERCICIOS SEMANA
-                                    4</span>
-                                <button class="text-gray-500 hover:text-white text-xs font-mono"
-                                        onclick="revertCard(this)">↩ Volver</button>
-                            </div>
-                            <div class="exercise-list space-y-2 pr-1">
-                                <% for (int i = 1; i <= 10; i++) {%>
-                                <a href="html/semana04/ejercicio<%= String.format(" %02d", i)%>.jsp"
-                                   class="exercise-link flex justify-between items-center p-2 rounded text-xs
-                                   font-mono text-gray-300">
-                                    <span>🃏 Ejercicio <%= i%></span>
-                                    <span class="text-[var(--dorado)]">Ver →</span>
-                                </a>
-                                <% } %>
-                            </div>
-                            <div class="pt-3 text-center border-t border-[#222]">
-                                <span class="text-[10px] text-gray-500 font-mono">SISTEMAS DE INFORMACIÓN</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="card-face card-face-back" onclick="event.stopPropagation();">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-xs text-[var(--dorado)] font-mono font-bold">EJERCICIOS SEMANA 2</span>
+                <button class="text-gray-500 hover:text-white text-xs font-mono" onclick="revertCard(this)">↩ Volver</button>
+            </div>
+
+            <div class="exercise-list space-y-2 pr-1 overflow-y-auto max-h-[220px]">
+                <a href="${pageContext.request.contextPath}/S2E1Controller" 
+                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                    <span class="truncate pr-2">🃏 S2E1 - Descuento del 11%</span>
+                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                </a>
+
+                <a href="${pageContext.request.contextPath}/S2E2Controller" 
+                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                    <span class="truncate pr-2">🃏 S2E2 - Oferta de Camisas 7%+7%</span>
+                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                </a>
+
+                <a href="${pageContext.request.contextPath}/S2E3Controller" 
+                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                    <span class="truncate pr-2">🃏 S2E3 - Pago Mensual Empleado</span>
+                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                </a>
+
+                <a href="${pageContext.request.contextPath}/S2E4Controller" 
+                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                    <span class="truncate pr-2">🃏 S2E4 - Donación Hospitalaria</span>
+                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                </a>
+
+                <a href="${pageContext.request.contextPath}/S2E5Controller" 
+                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                    <span class="truncate pr-2">🃏 S2E5 - Planilla de Vendedores</span>
+                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                </a>
+
+                <a href="${pageContext.request.contextPath}/S2E6Controller" 
+                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                    <span class="truncate pr-2">🃏 S2E6 - Retenciones AFP y ESSALUD</span>
+                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                </a>
+            </div>
+
+            <div class="pt-3 mt-2 text-center border-t border-[#222]">
+                <span class="text-[10px] text-gray-500 font-mono">SISTEMAS DE INFORMACIÓN</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="scene">
+    <div class="poker-card" onclick="flipCard(this)">
+        <div class="card-face card-face-front">
+            <div class="flex justify-between items-start">
+                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-003</span>
+                <span class="text-[var(--dorado)] text-xs font-mono">♦ 3</span>
+            </div>
+            <div class="my-auto text-center space-y-2">
+                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 3</h2>
+                <p class="text-xs text-gray-400 uppercase tracking-widest">Patrón de Diseño MVC</p>
+                <p class="text-[11px] text-gray-500 font-mono italic">Haz clic para ver los ejercicios</p>
+            </div>
+            <div class="border-t border-[#222] pt-3 text-center">
+                <span class="text-[11px] text-emerald-400 font-mono">🎴 6 Ejercicios Listos</span>
+            </div>
+        </div>
+
+        <div class="card-face card-face-back" onclick="event.stopPropagation();">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-xs text-[var(--dorado)] font-mono font-bold">EJERCICIOS SEMANA 3</span>
+                <button class="text-gray-500 hover:text-white text-xs font-mono" onclick="revertCard(this)">↩ Volver</button>
+            </div>
+
+            <div class="exercise-list space-y-2 pr-1 overflow-y-auto max-h-[220px]">
+                <% for (int i = 1; i <= 6; i++) { %>
+                <a href="${pageContext.request.contextPath}/S3E<%= i %>Controller" 
+                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                    <span>🃏 S3E<%= i %> - Ejercicio <%= i %></span>
+                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Ver →</span>
+                </a>
+                <% } %>
+            </div>
+
+            <div class="pt-3 mt-2 text-center border-t border-[#222]">
+                <span class="text-[10px] text-gray-500 font-mono">SISTEMAS DE INFORMACIÓN</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="scene">
+    <div class="poker-card" onclick="flipCard(this)">
+        <div class="card-face card-face-front">
+            <div class="flex justify-between items-start">
+                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-004</span>
+                <span class="text-[var(--dorado)] text-xs font-mono">♦ 4</span>
+            </div>
+            <div class="my-auto text-center space-y-2">
+                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 4</h2>
+                <p class="text-xs text-gray-400 uppercase tracking-widest">Excepciones y Flujos</p>
+                <p class="text-[11px] text-gray-500 font-mono italic">Haz clic para ver los ejercicios</p>
+            </div>
+            <div class="border-t border-[#222] pt-3 text-center">
+                <span class="text-[11px] text-emerald-400 font-mono">🎴 10 Ejercicios Listos</span>
+            </div>
+        </div>
+
+        <div class="card-face card-face-back" onclick="event.stopPropagation();">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-xs text-[var(--dorado)] font-mono font-bold">EJERCICIOS SEMANA 4</span>
+                <button class="text-gray-500 hover:text-white text-xs font-mono" onclick="revertCard(this)">↩ Volver</button>
+            </div>
+
+            <div class="exercise-list space-y-2 pr-1 overflow-y-auto max-h-[220px]">
+                <% for (int i = 1; i <= 10; i++) { %>
+                <a href="${pageContext.request.contextPath}/S4E<%= i %>Controller" 
+                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                    <span>🃏 S4E<%= i %> - Ejercicio <%= i %></span>
+                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Ver →</span>
+                </a>
+                <% } %>
+            </div>
+
+            <div class="pt-3 mt-2 text-center border-t border-[#222]">
+                <span class="text-[10px] text-gray-500 font-mono">SISTEMAS DE INFORMACIÓN</span>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <div class="scene">
                     <div class="poker-card" onclick="flipCard(this)">
