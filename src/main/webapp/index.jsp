@@ -851,8 +851,8 @@
                     <div class="poker-card" onclick="flipCard(this)">
                         <div class="card-face card-face-front flex flex-col justify-between p-5">
                             <div class="flex justify-between items-start">
-                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-010</span>
-                                <span class="text-[var(--dorado)] text-xs font-mono">♣ 10</span>
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-011</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♣ 11</span>
                             </div>
 
                             <div class="my-auto text-center space-y-2">
@@ -870,7 +870,7 @@
                             <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
                                 <div class="text-left">
                                     <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
-                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 10</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 11</span>
                                 </div>
                                 <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
                                     ↩ Volver
@@ -899,7 +899,7 @@
                     <div class="poker-card" onclick="flipCard(this)">
                         <div class="card-face card-face-front flex flex-col justify-between p-5">
                             <div class="flex justify-between items-start">
-                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-010</span>
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-012</span>
                                 <span class="text-[var(--dorado)] text-xs font-mono">♣ 12</span>
                             </div>
 
@@ -942,17 +942,17 @@
                         </div>
                     </div>
                 </div>
-                                   
-                                   <div class="scene">
+
+                <div class="scene">
                     <div class="poker-card" onclick="flipCard(this)">
                         <div class="card-face card-face-front flex flex-col justify-between p-5">
                             <div class="flex justify-between items-start">
-                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-010</span>
-                                <span class="text-[var(--dorado)] text-xs font-mono">♣ 12</span>
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-013</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♣ 13</span>
                             </div>
 
                             <div class="my-auto text-center space-y-2">
-                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 12</h2>
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 13</h2>
                                 <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Portafolio</p>
                                 <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los ejercicios</p>
                             </div>
@@ -989,7 +989,59 @@
                             </button>
                         </div>
                     </div>
-                </div>F
+                </div>
+
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <!-- CARA FRONTAL DE LA TARJETA -->
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-014</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♣ 14</span>
+                            </div>
+
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 14</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Producto Final</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para ver el sistema de asistencia</p>
+                            </div>
+
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🚀 Sistema Desplegado</span>
+                            </div>
+                        </div>
+
+                        <!-- CARA TRASERA DE LA TARJETA -->
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 14</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
+                                    ↩ Volver
+                                </button>
+                            </div>
+
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+
+                                <!-- ENLACE AL SISTEMA DE ASISTENCIA EN RENDER -->
+                                <a href="https://controlasistencia-sa8u.onrender.com/" 
+                                   target="_blank"
+                                   class="flex justify-between items-center p-3 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🎓 Sistema de Control de Asistencia</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity flex-shrink-0">Ingresar 🚀</span>
+                                </a>
+
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana14')" 
+                                    class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
+                                📖 Ver Manual Técnico S14
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
 

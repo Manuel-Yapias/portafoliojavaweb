@@ -1,348 +1,1070 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio - ROSALES YAPIAS MANUEL</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <style>
-        :root {
-            --dorado: #ffcc00;
-            --dorado-apagado: #b8860b;
-            --rojo-poker: #ff3344;
-            --fondo: #0a0a0a;
-        }
 
-        body {
-            background-color: var(--fondo);
-            /* Fondo sutil con trama geométrica de casino */
-            background-image: 
-                radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 0.95) 0%, rgba(5, 5, 5, 1) 100%),
-                linear-gradient(315deg, #111111 25%, transparent 25%), 
-                linear-gradient(45deg, #111111 25%, transparent 25%);
-            background-size: 100% 100%, 30px 30px, 30px 30px;
-            color: #ffffff;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Portafolio - ROSALES YAPIAS MANUEL</title>
+        <script src="https://cdn.tailwindcss.com"></script>
 
-        /* Contenedor tipo Carta de Póker para los Logos en el Header */
-        .poker-card-logo {
-            width: 70px;
-            height: 100px;
-            background: #141414;
-            border: 2px solid var(--dorado-apagado);
-            border-radius: 8px;
-            position: relative;
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.15), inset 0 0 10px rgba(0, 0, 0, 0.8);
-            transition: all 0.3s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px;
-        }
+        <style>
+            :root {
+                --dorado: #ffcc00;
+                --dorado-apagado: #b8860b;
+                --rojo-poker: #ff3344;
+                --fondo: #0a0a0a;
+            }
 
-        .poker-card-logo:hover {
-            transform: translateY(-6px) rotate(3deg);
-            border-color: var(--dorado);
-            box-shadow: 0 0 25px rgba(255, 204, 0, 0.4);
-        }
+            body {
+                background-color: var(--fondo);
+                background-image:
+                    radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 0.95) 0%, rgba(5, 5, 5, 1) 100%),
+                    linear-gradient(315deg, #111111 25%, transparent 25%),
+                    linear-gradient(45deg, #111111 25%, transparent 25%);
+                background-size: 100% 100%, 30px 30px, 30px 30px;
+                color: #ffffff;
+                font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            }
 
-        .card-corner-val {
-            position: absolute;
-            font-size: 11px;
-            font-family: monospace;
-            font-weight: bold;
-            line-height: 1;
-        }
+            /* Contenedor tipo Carta de Póker para los Logos en el Header */
+            .poker-card-logo {
+                width: 70px;
+                height: 100px;
+                background: #141414;
+                border: 2px solid var(--dorado-apagado);
+                border-radius: 8px;
+                position: relative;
+                box-shadow: 0 0 15px rgba(255, 204, 0, 0.15), inset 0 0 10px rgba(0, 0, 0, 0.8);
+                transition: all 0.3s ease-in-out;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 8px;
+            }
 
-        /* Botones laterales de navegación como fichas holográficas */
-        .poker-nav-btn {
-            background: rgba(18, 18, 18, 0.9);
-            border: 1px solid var(--dorado-apagado);
-            color: var(--dorado);
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
-        .poker-nav-btn:hover {
-            background: var(--dorado);
-            color: #000;
-            border-color: var(--dorado);
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
-            transform: scale(1.1);
-        }
+            .poker-card-logo:hover {
+                transform: translateY(-6px) rotate(3deg);
+                border-color: var(--dorado);
+                box-shadow: 0 0 25px rgba(255, 204, 0, 0.4);
+            }
 
-        /* Efecto de brillo de mesa */
-        .table-glow {
-            border: 1px solid rgba(255, 204, 0, 0.15);
-            box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(255, 204, 0, 0.05);
-        }
-    </style>
-</head>
-<body class="min-h-screen flex flex-col p-4 md:p-6 justify-between">
+            .card-corner-val {
+                position: absolute;
+                font-size: 11px;
+                font-family: monospace;
+                font-weight: bold;
+                line-height: 1;
+            }
 
-    <header class="w-full max-w-[1300px] mx-auto flex items-center justify-between py-6 px-8 bg-[#0d0d0d] border border-[#1c1c1c] rounded-t-lg relative">
-        
-        <div class="poker-card-logo select-none">
-            <div class="card-corner-val top-2 left-2.5 text-white">
-                A<br><span class="text-xs">♠</span>
+            /* ==================== EFECTO GIRO DE CARTA (FLIP CARD) ==================== */
+            .scene {
+                perspective: 1000px;
+                min-height: 420px;
+            }
+
+            .poker-card {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                transform-style: preserve-3d;
+                transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                cursor: pointer;
+            }
+
+            /* Clase dinámica de rotación aplicada mediante JS */
+            .poker-card.is-flipped {
+                transform: rotateY(180deg);
+            }
+
+            .card-face {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+                border-radius: 16px;
+                border: 2px solid var(--dorado-apagado);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(255, 204, 0, 0.05);
+                padding: 24px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            /* Cara Delantera (Negra/Art Deco) */
+            .card-face-front {
+                background: #0d0d0d;
+            }
+
+            /* Cara Trasera (Diseño de reverso de naipe con fondo dorado opaco y listado) */
+            .card-face-back {
+                background: #141414;
+                transform: rotateY(180deg);
+                border-color: var(--dorado);
+            }
+
+            /* Scroll elegante para la lista de ejercicios */
+            .exercise-list {
+                overflow-y: auto;
+                max-height: 260px;
+            }
+
+            .exercise-list::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            .exercise-list::-webkit-scrollbar-thumb {
+                background-color: var(--dorado-apagado);
+                border-radius: 4px;
+            }
+
+            /* Botones de ejercicios dentro de la carta */
+            .exercise-link {
+                background: #0a0a0a;
+                border: 1px solid #222;
+                transition: all 0.2s ease;
+            }
+
+            .exercise-link:hover {
+                border-color: var(--dorado);
+                background: #111;
+                color: var(--dorado);
+            }
+        </style>
+    </head>
+
+    <body class="min-h-screen flex flex-col p-4 md:p-6 justify-between">
+
+        <header
+            class="w-full max-w-[1300px] mx-auto flex items-center justify-between py-6 px-8 bg-[#0d0d0d] border border-[#1c1c1c] rounded-t-lg relative">
+            <div class="poker-card-logo select-none">
+                <div class="card-corner-val top-2 left-2.5 text-white">
+                    A<br><span class="text-xs">♠</span>
+                </div>
+                <div class="card-corner-val bottom-2 right-2.5 text-white text-right">
+                    ♠<br>A
+                </div>
+                <img src="assets/carrera.png" alt="Carrera"
+                     class="max-w-[42px] max-h-[42px] object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             </div>
-            <div class="card-corner-val bottom-2 right-2.5 text-white text-right">
-                ♠<br>A
-            </div>
-            <img src="assets/carrera.png" alt="Carrera" class="max-w-[42px] max-h-[42px] object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-        </div>
 
-        <div class="text-center flex-1 mx-4">
-            <h1 class="text-2xl md:text-3.5xl font-black tracking-[0.2em] text-white uppercase">
-                ROSALES YAPIAS MANUEL
-            </h1>
-            <p class="text-xs md:text-sm text-[var(--dorado)] tracking-[0.4em] uppercase mt-2 font-mono">
-                ♠ LENGUAJE DE PROGRAMACIÓN ♦
-            </p>
-        </div>
-
-        <div class="poker-card-logo select-none">
-            <div class="card-corner-val top-2 left-2.5 text-[var(--rojo-poker)]">
-                Q<br><span class="text-xs">♦</span>
+            <div class="text-center flex-1 mx-4">
+                <h1 class="text-2xl md:text-3.5xl font-black tracking-[0.2em] text-white uppercase">
+                    ROSALES YAPIAS MANUEL
+                </h1>
+                <p class="text-xs md:text-sm text-[var(--dorado)] tracking-[0.4em] uppercase mt-2 font-mono">
+                    ♠ LENGUAJE DE PROGRAMACIÓN ♦
+                </p>
             </div>
-            <div class="card-corner-val bottom-2 right-2.5 text-[var(--rojo-poker)] text-right">
-                ♦<br>Q
-            </div>
-            <img src="assets/instituto.png" alt="Instituto" class="max-w-[42px] max-h-[42px] object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-        </div>
-    </header>
 
-    <div class="w-full max-w-[1300px] mx-auto bg-[#111] border-x border-b border-[#1c1c1c] py-3 px-8 flex justify-between items-center text-xs font-mono text-gray-400">
-        <div class="flex items-center space-x-2">
-            <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>📡 Servidor Activo</span>
-        </div>
-        <div>
-            <%
-                String usuarioLogueado = (String) session.getAttribute("session_usuario");
-                if (usuarioLogueado != null) {
-            %>
-                <span>En línea: <strong class="text-[var(--dorado)]"><%= usuarioLogueado %></strong></span>
+            <div class="poker-card-logo select-none">
+                <div class="card-corner-val top-2 left-2.5 text-[var(--rojo-poker)]">
+                    Q<br><span class="text-xs">♦</span>
+                </div>
+                <div class="card-corner-val bottom-2 right-2.5 text-[var(--rojo-poker)] text-right">
+                    ♦<br>Q
+                </div>
+                <img src="assets/instituto.png" alt="Instituto"
+                     class="max-w-[42px] max-h-[42px] object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            </div>
+        </header>
+
+        <div
+            class="w-full max-w-[1300px] mx-auto bg-[#111] border-x border-b border-[#1c1c1c] py-3 px-8 flex justify-between items-center text-xs font-mono text-gray-400 mb-6">
+            <div class="flex items-center space-x-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>📡 Servidor Activo</span>
+            </div>
+            <div>
+                <% String usuarioLogueado = (String) session.getAttribute("session_usuario");
+                    if (usuarioLogueado != null) {%>
+                <span>En línea: <strong class="text-[var(--dorado)]">
+                        <%= usuarioLogueado%>
+                    </strong></span>
                 <span class="mx-2 text-gray-600">|</span>
                 <a href="logout" class="text-[var(--rojo-poker)] hover:underline">Cerrar Sesión</a>
-            <% } else { %>
-                <a href="login.jsp" class="text-[var(--dorado)] hover:text-white transition-colors">🔑 Iniciar Sesión / Registrarse</a>
-            <% } %>
+                <% } else { %>
+                <a href="login.jsp" class="text-[var(--dorado)] hover:text-white transition-colors">🔑 Iniciar
+                    Sesión / Registrarse</a>
+                    <% }%>
+            </div>
         </div>
-    </div>
 
-    <main class="w-full max-w-[1300px] mx-auto mt-6 flex-1 flex items-center relative">
-        
-        <button class="poker-nav-btn absolute left-[-16px] z-20 w-12 h-12 rounded-full flex items-center justify-center text-lg focus:outline-none" 
-                onclick="alert('Semana anterior')">
-            ❮
-        </button>
+        <main class="w-full max-w-[1300px] mx-auto flex-1">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-2">
 
-        <button class="poker-nav-btn absolute right-[-16px] z-20 w-12 h-12 rounded-full flex items-center justify-center text-lg focus:outline-none" 
-                onclick="alert('Siguiente semana')">
-            ❯
-        </button>
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-001</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♦ A</span>
+                            </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full px-2">
-            
-            <section class="lg:col-span-7 bg-[#111111]/95 border border-[#222] p-8 rounded-lg table-glow flex flex-col justify-between relative min-h-[500px]">
-                <div>
-                    <div class="text-[10px] tracking-widest text-gray-500 font-mono mb-4 uppercase">
-                        🗀 PROYECTO_JAVA_ENTERPRISE
-                    </div>
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 01</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Introducción y Estructuras Secuenciales</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los 10 ejercicios</p>
+                            </div>
 
-                    <div class="bg-[#080808] border border-[#222] rounded p-4 mb-6">
-                        <div class="flex items-center space-x-1.5 mb-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
-                            <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
-                            <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🎴 Deck de 10 Cartas Completado</span>
+                            </div>
                         </div>
-                        <div class="text-[11px] text-gray-500 font-mono mb-3">// Cargando ambiente de pruebas...</div>
-                        <div class="flex gap-2">
-                            <span class="bg-[#151515] text-[10px] text-gray-400 px-2.5 py-1 rounded font-mono border border-[#222]">JAVA EE</span>
-                            <span class="bg-[#151515] text-[10px] text-gray-400 px-2.5 py-1 rounded font-mono border border-[#222]">SPRING BOOT</span>
-                            <span class="bg-[#151515] text-[10px] text-gray-400 px-2.5 py-1 rounded font-mono border border-[#222]">POSTGRES</span>
-                        </div>
-                    </div>
 
-                    <div class="space-y-3">
-                        <span class="inline-block bg-[var(--dorado-apagado)]/10 border border-[var(--dorado-apagado)] text-[var(--dorado)] text-[10px] font-mono px-3 py-1 rounded-full uppercase tracking-wider">
-                            SEMANA ${numeroSemana != null ? numeroSemana : "N/A"}
-                        </span>
-                        <h2 class="text-2xl font-bold tracking-wide text-white uppercase">
-                            Título: ${tituloSemana != null ? tituloSemana : "Título no asignado"}
-                        </h2>
-                        <p class="text-xs text-gray-400 leading-relaxed font-mono">
-                            ${descripcionSemana != null ? descripcionSemana : "Sin descripción disponible para esta entrega."}
-                        </p>
-                    </div>
-                </div>
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
 
-                <div class="mt-8">
-                    <h4 class="text-[10px] tracking-wider text-gray-500 font-mono mb-3 uppercase">♣ Actividades Programadas</h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <% 
-                            java.util.List<String> listaActividades = (java.util.List<String>) request.getAttribute("listaActividades");
-                            if (listaActividades != null && !listaActividades.isEmpty()) {
-                                for (String actividad : listaActividades) {
-                        %>
-                            <button class="bg-[#090909] border border-[#222] hover:border-[var(--dorado)] text-left p-3 rounded text-xs text-gray-300 font-mono transition-colors flex justify-between items-center">
-                                <span>🃏 <%= actividad %></span>
-                                <span class="text-[var(--dorado)]">→</span>
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 1</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
+                                    ↩ Volver
+                                </button>
+                            </div>
+
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+
+                                <a href="${pageContext.request.contextPath}/S1E1Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S1E1 - Área y Perímetro</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S1E2Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S1E2 - Círculo y Circunferencia</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S1E3Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S1E3 - Área del Rombo</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S1E4Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S1E4 - Cilindro (Área y Volumen)</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S1E5Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S1E5 - Cubo (Área y Volumen)</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S1E6Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S1E6 - Cociente y Residuo</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S1E7Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S1E7 - Invertir Número (5 Dígitos)</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S1E8Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S1E8 - Conversor de Segundos</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S1E9Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S1E9 - Reparto de Herencia</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S1E10Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S1E10 - Presupuesto de Feria</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana1')" 
+                                    class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
+                                📖 Ver Manual Técnico S1
                             </button>
-                        <% 
-                                }
-                            } else {
-                        %>
-                            <div class="col-span-2 text-xs text-gray-600 font-mono italic">No hay actividades registradas para esta semana.</div>
-                        <% } %>
-                    </div>
-                </div>
-            </section>
-
-            <section class="lg:col-span-5 bg-[#111111]/95 border border-[#222] rounded-lg table-glow flex flex-col h-[500px] overflow-hidden">
-                <div class="bg-[#090909] border-b border-[#222] p-4 flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-full border border-[var(--dorado-apagado)] bg-[#151515] flex items-center justify-center text-lg">
-                        🤖
-                    </div>
-                    <div>
-                        <h4 class="text-xs font-bold font-mono tracking-wider text-white">ASISTENTE VIRTUAL</h4>
-                        <p class="text-[9px] text-emerald-500 font-mono flex items-center">
-                            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
-                            ● EN LÍNEA AHORA
-                        </p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="flex-1 p-4 overflow-y-auto space-y-4 bg-[#070707]/60" id="chatContainer">
-                    <div class="msg bot max-w-[85%] bg-[#151515] border border-[#222] p-3 rounded text-xs text-gray-300 font-mono leading-relaxed">
-                        Hola, Manuel. He analizado el mazo de actividades. ¿Te gustaría consultar o reportar el progreso del código?
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <div class="card-face card-face-front">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-002</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♦ 2</span>
+                            </div>
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 2</h2>
+                                <p class="text-xs text-gray-400 uppercase tracking-widest">Estructuras de Datos</p>
+                                <p class="text-[11px] text-gray-500 font-mono italic">Haz clic para ver los ejercicios</p>
+                            </div>
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🎴 6 Ejercicios Listos</span>
+                            </div>
+                        </div>
+
+                        <div class="card-face card-face-back" onclick="event.stopPropagation();">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs text-[var(--dorado)] font-mono font-bold">EJERCICIOS SEMANA 2</span>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono" onclick="revertCard(this)">↩ Volver</button>
+                            </div>
+
+                            <div class="exercise-list space-y-2 pr-1 overflow-y-auto max-h-[220px]">
+                                <a href="${pageContext.request.contextPath}/S2E1Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S2E1 - Descuento del 11%</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S2E2Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S2E2 - Oferta de Camisas 7%+7%</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S2E3Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S2E3 - Pago Mensual Empleado</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S2E4Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S2E4 - Donación Hospitalaria</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S2E5Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S2E5 - Planilla de Vendedores</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S2E6Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S2E6 - Retenciones AFP y ESSALUD</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+                            </div>
+
+                            <div class="pt-3 mt-2 text-center border-t border-[#222]">
+                                <span class="text-[10px] text-gray-500 font-mono">SISTEMAS DE INFORMACIÓN</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="p-3 bg-[#0a0a0a] border-t border-[#222] flex space-x-2">
-                    <input type="text" id="userInput" class="flex-1 bg-[#050505] border border-[#222] text-white px-3 py-2.5 rounded text-xs font-mono focus:outline-none focus:border-[var(--dorado)]" 
-                           placeholder="Pregúntale algo a la IA..." onkeypress="evaluarEnter(event)">
-                    <button class="bg-[var(--dorado-apagado)] hover:bg-[var(--dorado)] text-black font-bold text-xs px-4 rounded transition-colors font-mono" 
-                            onclick="enviarMensaje()">
-                        ENVIAR
-                    </button>
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-003</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♦ 3</span>
+                            </div>
+
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 03</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Implementación de Métodos en Java</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los 6 proyectos</p>
+                            </div>
+
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🎴 Deck de 6 Cartas Completado</span>
+                            </div>
+                        </div>
+
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
+
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 3</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
+                                    ↩ Volver
+                                </button>
+                            </div>
+
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+
+                                <a href="${pageContext.request.contextPath}/S3E1Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S3E1 - Descuento del 11% y Caramelos</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S3E2Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S3E2 - Descuento Sucesivo 10% + 10%</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S3E3Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S3E3 - Pago Mensual de Empleado</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S3E4Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S3E4 - Pasajes con Descuento y Chocolates</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S3E5Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S3E5 - Salario de Vendedor (Comisión 9%)</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S3E6Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S3E6 - Salario con ESSALUD y AFP</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana3')" 
+                                    class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
+                                📖 Ver Manual Técnico S3
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </section>
 
-        </div>
-    </main>
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-004</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♦ 4</span>
+                            </div>
 
-    <footer class="w-full max-w-[1300px] mx-auto mt-8 text-center text-[10px] text-gray-600 tracking-[0.3em] uppercase py-4 border-t border-[#161616]">
-        ♦ PORTAFOLIO ACADÉMICO - ROSALES YAPIAS MANUEL © 2026 ♦
-    </footer>
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 04</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Sentencias Selectivas e Incentivos</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los 4 ejercicios</p>
+                            </div>
 
-<script>
-function evaluarEnter(event) {
-    if (event.key === "Enter") {
-        enviarMensaje();
-    }
-}
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🎴 Deck de 4 Cartas Completado</span>
+                            </div>
+                        </div>
 
-function enviarMensaje() {
-    const input = document.getElementById("userInput");
-    const mensajeTexto = input.value.trim();
-    if (mensajeTexto === "") return;
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
 
-    const chatContainer = document.getElementById("chatContainer");
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 4</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
+                                    ↩ Volver
+                                </button>
+                            </div>
 
-    // 1. Crear el mensaje del usuario con la estética de tu portafolio
-    const userDiv = document.createElement("div");
-    userDiv.className = "msg user"; 
-    userDiv.style.alignSelf = "flex-end";
-    userDiv.style.background = "#1d1d1d";
-    userDiv.style.border = "1px solid #ffcc00"; // Borde dorado
-    userDiv.style.color = "white";
-    userDiv.style.padding = "12px 16px";
-    userDiv.style.borderRadius = "10px";
-    userDiv.style.maxWidth = "85%";
-    userDiv.style.fontSize = "13px";
-    userDiv.style.marginLeft = "auto";
-    userDiv.style.marginBottom = "10px";
-    userDiv.innerText = mensajeTexto;
-    
-    chatContainer.appendChild(userDiv);
-    
-    input.value = "";
-    chatContainer.scrollTop = chatContainer.scrollHeight;
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
 
-    // 2. Llamada AJAX usando POST
-    fetch('${pageContext.request.contextPath}/ChatServlet', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: 'msg=' + encodeURIComponent(mensajeTexto)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Código de estado HTTP: ' + response.status);
-        }
-        return response.json();
-    })
-    .then(data => {
-        const botDiv = document.createElement("div");
-        botDiv.className = "msg bot";
-        botDiv.style.alignSelf = "flex-start";
-        botDiv.style.background = "#151515";
-        botDiv.style.border = "1px solid #222";
-        botDiv.style.color = "#d1d5db";
-        botDiv.style.padding = "12px 16px";
-        botDiv.style.borderRadius = "10px";
-        botDiv.style.maxWidth = "85%";
-        botDiv.style.fontSize = "13px";
-        botDiv.style.marginBottom = "10px";
-        
-        if (data.isSystem) {
-            botDiv.innerHTML = `<div style="font-size: 10px; color: #ffcc00; margin-bottom: 4px;">⚙️ SISTEMA GEN</div>\${data.reply}`;
-        } else {
-            botDiv.innerText = data.reply;
-        }
-        
-        chatContainer.appendChild(botDiv);
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-    })
-    .catch(error => {
-        console.error("Detalle del error:", error);
-        const errorDiv = document.createElement("div");
-        errorDiv.className = "msg bot";
-        errorDiv.style.alignSelf = "flex-start";
-        errorDiv.style.background = "rgba(127, 29, 29, 0.2)";
-        errorDiv.style.border = "1px solid rgba(153, 27, 27, 0.4)";
-        errorDiv.style.color = "#f87171";
-        errorDiv.style.padding = "12px 16px";
-        errorDiv.style.borderRadius = "10px";
-        errorDiv.style.maxWidth = "85%";
-        errorDiv.style.fontSize = "12px";
-        errorDiv.style.marginBottom = "10px";
-        errorDiv.innerText = "Error de conexión (" + error.message + "). Asegúrate de compilar el Servlet.";
-        
-        chatContainer.appendChild(errorDiv);
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-    });
-}
+                                <a href="${pageContext.request.contextPath}/S4E1Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S4E1 - Alquiler Renta Car</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
 
-document.addEventListener("DOMContentLoaded", function() {
-    const header = document.querySelector("header");
+                                <a href="${pageContext.request.contextPath}/S4E2Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S4E2 - Control de Horas Extras</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
 
-    if (header) {
-        header.addEventListener("click", function() {
-            header.classList.add("sobrecarga");
-            setTimeout(() => {
-                header.classList.remove("sobrecarga");
-            }, 1200);
-        });
-    }
-});
-</script>
+                                <a href="${pageContext.request.contextPath}/S4E3Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S4E3 - Estacionamiento por Horas</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
 
-</body>
+                                <a href="${pageContext.request.contextPath}/S4E4Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S4E4 - Promedio de Prácticas</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana4')" 
+                                    class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
+                                Skybook 📖 Ver Manual Técnico S4
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-005</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♣ 5</span>
+                            </div>
+
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 05</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Estructuras de Control Repetitivas</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los 6 ejercicios</p>
+                            </div>
+
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🎴 Deck de 6 Cartas Completado</span>
+                            </div>
+                        </div>
+
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
+
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 5</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
+                                    ↩ Volver
+                                </button>
+                            </div>
+
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+
+                                <a href="${pageContext.request.contextPath}/S5E1Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S5E1 - Multiplicación por Sumas</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S5E2Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S5E2 - Potencia por Multiplicaciones</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S5E3Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S5E3 - Análisis de Dígitos</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S5E4Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S5E4 - Suma de Serie Alternada</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S5E5Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S5E5 - Control de Venta de Cuadernos</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S5E6Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S5E6 - Distribución de Stocks</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana5')" 
+                                    class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
+                                📖 Ver Manual Técnico S5
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <!-- CARA FRONTAL -->
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-006</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♦ 6</span>
+                            </div>
+
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 06</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Estructuras de Control y MVC</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los 3 proyectos</p>
+                            </div>
+
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🎴 Deck de 3 Cartas Completado</span>
+                            </div>
+                        </div>
+
+                        <!-- CARA TRASERA -->
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
+
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 6</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
+                                    ↩ Volver
+                                </button>
+                            </div>
+
+                            <!-- Listado de los 3 Proyectos de la Semana 06 -->
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+
+                                <!-- Proyecto 01 -->
+                                <a href="${pageContext.request.contextPath}/S6E1Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S6E1 - Simulación de Pensiones A</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <!-- Proyecto 02 -->
+                                <a href="${pageContext.request.contextPath}/S6E2Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S6E2 - Gestión de Cuotas y Descuentos</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <!-- Proyecto 03 -->
+                                <a href="${pageContext.request.contextPath}/S6E3Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S6E3 - Rebaja de Pensión por Promedio</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana6')" 
+                                    class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
+                                📖 Ver Manual Técnico S6
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-007</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♣ 7</span>
+                            </div>
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 07</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Clases String & Cadenas</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los ejercicios</p>
+                            </div>
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🎴 Deck de 2 Cartas Completado</span>
+                            </div>
+                        </div>
+
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 7</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">↩ Volver</button>
+                            </div>
+
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+                                <a href="${pageContext.request.contextPath}/S7E1Controller" class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S7E1 - Enmascarador de Tarjetas</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+                                <a href="${pageContext.request.contextPath}/S7E2Controller" class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S7E2 - Censor de Chat VIP</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana7')" class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">📖 Ver Manual Técnico S7</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-008</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♦ 8</span>
+                            </div>
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 08</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Arquitectura Math & MVC</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los ejercicios</p>
+                            </div>
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🎴 Deck de 2 Cartas Completado</span>
+                            </div>
+                        </div>
+
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 8</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">↩ Volver</button>
+                            </div>
+
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+                                <a href="${pageContext.request.contextPath}/S8E1Controller" class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S8E1 - Pitágoras Express</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+                                <a href="${pageContext.request.contextPath}/S8E2Controller" class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S8E2 - Bóveda de Interés Continuo</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana8')" class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">📖 Ver Manual Técnico S8</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-009</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♠ 9</span>
+                            </div>
+
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 09</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Arquitectura MVC & POO</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los ejercicios</p>
+                            </div>
+
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🎴 Deck de 2 Cartas Completado</span>
+                            </div>
+                        </div>
+
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 9</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
+                                    ↩ Volver
+                                </button>
+                            </div>
+
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+
+                                <a href="${pageContext.request.contextPath}/S9E1Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S9E1 - Calculadora de Descuentos</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S9E2Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🃏 S9E2 - Sistema de Planillas</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana9')" 
+                                    class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
+                                📖 Ver Manual Técnico S9
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-010</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♣ 10</span>
+                            </div>
+
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 10</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Java Math & Strings</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los ejercicios</p>
+                            </div>
+
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🚀 Ejecución Finalizada</span>
+                            </div>
+                        </div>
+
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 10</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
+                                    ↩ Volver
+                                </button>
+                            </div>
+
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+
+                                <a href="${pageContext.request.contextPath}/S10E1Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🧮 S10E1 - Control de Overflow</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/S10E2Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">📝 S10E2 - Contador de Palabras</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana10')" 
+                                    class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
+                                📖 Ver Manual Técnico S10
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-011</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♣ 11</span>
+                            </div>
+
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 11</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Portafolio</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los ejercicios</p>
+                            </div>
+
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🚀 Ejecución Finalizada</span>
+                            </div>
+                        </div>
+
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 11</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
+                                    ↩ Volver
+                                </button>
+                            </div>
+
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+
+                                <a href="${pageContext.request.contextPath}/S11E1Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🧮 S11E1 - Boceto del portafolio</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana10')" 
+                                    class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
+                                📖 Ver Manual Técnico S10
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-012</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♣ 12</span>
+                            </div>
+
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 12</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Portafolio</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los ejercicios</p>
+                            </div>
+
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🚀 Ejecución Finalizada</span>
+                            </div>
+                        </div>
+
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 12</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
+                                    ↩ Volver
+                                </button>
+                            </div>
+
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+
+                                <a href="${pageContext.request.contextPath}/S12E1Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🧮 S12E1 - Hosting Gratuito</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana10')" 
+                                    class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
+                                📖 Ver Manual Técnico S12
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-013</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♣ 13</span>
+                            </div>
+
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 13</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Portafolio</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para desplegar los ejercicios</p>
+                            </div>
+
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🚀 Ejecución Finalizada</span>
+                            </div>
+                        </div>
+
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 13</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
+                                    ↩ Volver
+                                </button>
+                            </div>
+
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+
+                                <a href="${pageContext.request.contextPath}/S13E1Controller" 
+                                   class="flex justify-between items-center p-2 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🧮 S13E1 - Manual Login</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity">Jugar →</span>
+                                </a>
+
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana10')" 
+                                    class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
+                                📖 Ver Manual Técnico S13
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scene">
+                    <div class="poker-card" onclick="flipCard(this)">
+                        <!-- CARA FRONTAL DE LA TARJETA -->
+                        <div class="card-face card-face-front flex flex-col justify-between p-5">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">SN-014</span>
+                                <span class="text-[var(--dorado)] text-xs font-mono">♣ 14</span>
+                            </div>
+
+                            <div class="my-auto text-center space-y-2">
+                                <h2 class="text-3xl font-extrabold text-[var(--dorado)] tracking-wider">SEMANA 14</h2>
+                                <p class="text-[11px] text-gray-300 uppercase tracking-widest font-bold">Producto Final</p>
+                                <p class="text-[10px] text-gray-500 font-mono italic">Haz clic para ver el sistema de asistencia</p>
+                            </div>
+
+                            <div class="border-t border-[#222] pt-3 text-center">
+                                <span class="text-[11px] text-emerald-400 font-mono">🚀 Sistema Desplegado</span>
+                            </div>
+                        </div>
+
+                        <!-- CARA TRASERA DE LA TARJETA -->
+                        <div class="card-face card-face-back p-5 flex flex-col justify-between" onclick="event.stopPropagation();">
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-zinc-900">
+                                <div class="text-left">
+                                    <span class="text-[10px] text-gray-500 font-mono block">MESA DE TRABAJO</span>
+                                    <span class="text-xs text-[var(--dorado)] font-mono font-bold tracking-widest">SEMANA 14</span>
+                                </div>
+                                <button class="text-gray-500 hover:text-white text-xs font-mono bg-[#111] px-2.5 py-1 rounded border border-[#222] hover:border-gray-600 transition-all" onclick="revertCard(this)">
+                                    ↩ Volver
+                                </button>
+                            </div>
+
+                            <div class="exercise-list space-y-2 pr-1.5 mb-4 max-h-[360px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+
+                                <!-- ENLACE AL SISTEMA DE ASISTENCIA EN RENDER -->
+                                <a href="https://controlasistencia-sa8u.onrender.com/" 
+                                   target="_blank"
+                                   class="flex justify-between items-center p-3 rounded bg-[#0a0a0a] border border-[#161616] hover:border-[var(--dorado)] text-xs font-mono text-gray-300 hover:text-white transition-all group">
+                                    <span class="truncate pr-2">🎓 Sistema de Control de Asistencia</span>
+                                    <span class="text-[var(--dorado)] opacity-70 group-hover:opacity-100 transition-opacity flex-shrink-0">Ingresar 🚀</span>
+                                </a>
+
+                            </div>
+
+                            <button onclick="abrirManual('manualSemana14')" 
+                                    class="w-full py-2 bg-amber-950/40 hover:bg-[var(--dorado)] hover:text-black border border-[var(--dorado-apagado)] rounded text-[10px] font-mono text-[var(--dorado)] transition-all uppercase tracking-wider font-bold">
+                                📖 Ver Manual Técnico S14
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer
+            class="w-full max-w-[1300px] mx-auto mt-12 text-center text-[10px] text-gray-600 tracking-[0.3em] uppercase py-4 border-t border-[#161616]">
+            ♦ PORTAFOLIO ACADÉMICO - ROSALES YAPIAS MANUEL © 2026 ♦
+        </footer>
+
+        <script>
+            function flipCard(cardElement) {
+                // Girar la carta aplicando la clase CSS
+                cardElement.classList.add('is-flipped');
+            }
+
+            function revertCard(buttonElement) {
+                // Detener la propagación del evento para evitar que el div padre vuelva a disparar flipCard
+                event.stopPropagation();
+                // Buscar la carta contenedora y quitarle la clase de rotación
+                const card = buttonElement.closest('.poker-card');
+                card.classList.remove('is-flipped');
+            }
+        </script>
+
+    </body>
+
 </html>

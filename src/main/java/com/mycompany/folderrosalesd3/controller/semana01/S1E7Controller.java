@@ -33,7 +33,7 @@ public class S1E7Controller extends HttpServlet {
                 
                 // Inyectar resultados calculados
                 request.setAttribute("original", input);
-                request.setAttribute("inverso", modelo.obtainInverso());
+                request.setAttribute("inverso", modelo.obtenerInverso()); // CORREGIDO AQUÍ
             }
 
         } catch (NumberFormatException e) {
